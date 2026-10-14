@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bear Agency Başvurusu</title>
+    <link rel="stylesheet" href="style.css?v=4">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="showHome()">Bear <span>Agency</span></div>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showHome()">Ana Sayfa</a></li>
+                <li><a href="#" onclick="showForm()">Başvuru Yap</a></li>
+            </ul>
+            <button class="btn-join">Bize Katıl</button>
+        </div>
+    </nav>
+
+    <!-- ANA SAYFA (HOME PAGE) -->
+    <div id="home-page">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <p class="subtitle">YAYINCI YOLCULUĞUNA SEVİYE ATLAT</p>
+                <h1>Bear Agency'e Katıl<br>& Kitleni Büyüt.</h1>
+                <p class="desc">Bear Agency sosyal medya içerik üreticileri ajansına katıl, modern destek merkezinden ilham alan profesyonel ağın parçası ol.</p>
+                <button class="btn-blue" onclick="showForm()">BAŞVURUNU BAŞLAT</button>
+            </div>
+            <div class="hero-images">
+                <!-- Yayıncı görselleri -->
+                <div class="mockup-grid">
+                    <div class="mockup-item float-a"><img src="images/yayinci-sol.jpg" alt="Halka ışıkla canlı yayın yapan yayıncı" loading="lazy"></div>
+                    <div class="mockup-item highlight float-b"><img src="images/yayin-orta.jpg" alt="Canlı yayın ekranı"></div>
+                    <div class="mockup-item float-c"><img src="images/yayinci-sag.jpg" alt="Mikrofonla yayın yapan yayıncı" loading="lazy"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <h2>NEDEN BEAR AGENCY?</h2>
+            <div class="features-grid">
+                <div class="feature-card border-pink">
+                    <span class="icon">📈</span>
+                    <h3>Büyüme</h3>
+                    <p>Hızlı ve organik büyüme stratejileri ile kitleni genişlet.</p>
+                </div>
+                <div class="feature-card border-blue">
+                    <span class="icon">💸</span>
+                    <h3>Kazanç</h3>
+                    <p>Yayınlarından ve içeriklerinden en iyi geliri elde et.</p>
+                </div>
+                <div class="feature-card border-blue">
+                    <span class="icon">👥</span>
+                    <h3>Topluluk</h3>
+                    <p>Marka topluluğu ve güçlü bir ağ ile desteklen.</p>
+                </div>
+                <div class="feature-card border-pink">
+                    <span class="icon">🎧</span>
+                    <h3>Destek</h3>
+                    <p>Gerçekçi, samimi ve 7/24 süper destek al.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- BAŞVURU SAYFASI (FORM PAGE) -->
+    <div id="form-page" style="display: none;">
+        <div class="form-header">
+            <h2>BEAR AGENCY'E BAŞVUR</h2>
+            <p>(Başvuru Formu)</p>
+        </div>
+
+        <div class="form-container">
+            <form id="applicationForm" action="https://formspree.io/f/BURAYA_FORM_ID_GELECEK" method="POST" novalidate>
+                
+                <!-- Adım 1: Kimlik & İletişim -->
+                <div class="form-step active" id="step1">
+                    <div class="input-grid">
+                        <div class="input-group">
+                            <label>Tam Adınız</label>
+                            <input type="text" name="Tam_Ad" required placeholder="Adınız Soyadınız">
+                        </div>
+                        <div class="input-group">
+                            <label>Kaç Yaşındasınız?</label>
+                            <input type="number" name="Yas" required placeholder="Yaşınız" min="18">
+                        </div>
+                        <div class="input-group">
+                            <label>Sizinle nasıl iletişim kurmamızı istersiniz?</label>
+                            <select name="Iletisim_Tercihi" id="iletisimTercihi" required onchange="handleIletisimChange()">
+                                <option value="">İletişim Kanalı Seçin</option>
+                                <option value="WhatsApp">WhatsApp</option>
+                                <option value="Instagram">Instagram DM</option>
+                                <option value="Telefon">Telefon Numarası</option>
+                                <option value="TikTok">TikTok</option>
+                                <option value="Telegram">Telegram</option>
+                            </select>
+                        </div>
+                        <!-- Gizli Kutucuk (Dinamik açılacak) -->
+                        <div class="input-group" id="gizliIletisimKutusu" style="display: none; animation: fadeIn 0.4s ease;">
+                            <label id="gizliIletisimLabel">İletişim Bilginiz</label>
+                            <input type="text" name="Iletisim_Bilgisi" id="iletisimBilgisi" placeholder="Bilginizi giriniz">
+                        </div>
+                    </div>
+                    <div class="btn-group right">
+                        <button type="button" class="btn-pink" onclick="nextStep(1)">İleri</button>
+                    </div>
+                </div>
+
+                <!-- Adım 2: Profil & Deneyim -->
+                <div class="form-step" id="step2">
+                    <div class="input-grid">
+                        <div class="input-group">
+                            <label>TikTok Kullanıcı Adınız / Profil Linkiniz</label>
+                            <input type="text" name="Tiktok_Profil" required placeholder="Kullanıcı Adınız veya URL">
+                        </div>
+                        <div class="input-group">
+                            <label>Kaç yıldır sosyal medya kullanıyorsunuz?</label>
+                            <input type="text" name="Sosyal_Medya_Suresi" required placeholder="Örn: 2 Yıl">
+                        </div>
+                        <div class="input-group">
+                            <label>Daha önce hangi sosyal medya platformlarını kullandınız?</label>
+                            <small class="field-hint">Kullanmadıysanız boş bırakınız.</small>
+                            <select name="Platformlar">
+                                <option value="">Seçiniz</option>
+                                <option value="Facebook">Facebook</option>
+                                <option value="Instagram">Instagram</option>
+                                <option value="Twitter">Twitter</option>
+                                <option value="TikTok">TikTok</option>
+                                <option value="YouTube">YouTube</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>İçerik üreticisi misiniz, yoksa diğer kullanıcı mı?</label>
+                            <select name="Kullanici_Turu" required>
+                                <option value="">Seçiniz</option>
+                                <option value="Yeni Başladım">Yeni başladım</option>
+                                <option value="İçerik Üreticisi">İçerik üreticisiyim</option>
+                                <option value="Diğer Kullanıcı">Diğer kullanıcıyım</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>(Üreticiyseniz) Daha önce neler denediniz?</label>
+                            <small class="field-hint">Yeniyseniz veya diğer kullanıcıysanız boş bırakın.</small>
+                            <input type="text" name="Deneyimler" placeholder="Yayıncılık, video düzenleme vb.">
+                        </div>
+                    </div>
+                    <div class="btn-group split">
+                        <button type="button" class="btn-dark" onclick="prevStep(2)">Geri</button>
+                        <button type="button" class="btn-pink" onclick="nextStep(2)">İleri</button>
+                    </div>
+                </div>
+
+                <!-- Adım 3: Yayıncılık & Beklenti -->
+                <div class="form-step" id="step3">
+                    <div class="input-grid">
+                        <div class="input-group">
+                            <label>Üretmek istediğiniz içerik / konsept nedir?</label>
+                            <input type="text" name="Kategori" required placeholder="Oyun, Sohbet, Dans vb.">
+                        </div>
+                        <div class="input-group">
+                            <label>Özel bir yeteneğiniz veya hobiniz var mı?</label>
+                            <small class="field-hint">Varsa yazın, yoksa boş bırakın.</small>
+                            <input type="text" name="Yetenek_Hobi" placeholder="Şarkı, dans, astroloji vb.">
+                        </div>
+                        <div class="input-group">
+                            <label>Yayınlara ayırabileceğiniz zaman?</label>
+                            <input type="text" name="Zaman" required placeholder="Örn: Günde 3 saat">
+                        </div>
+                        <div class="input-group">
+                            <label>Ekipman durumunuz nasıl?</label>
+                            <input type="text" name="Ekipman" required placeholder="Sadece telefon / PC vb.">
+                        </div>
+                        <div class="input-group">
+                            <label>Sosyal medyada 1 yıl sonraki en büyük hedefiniz nedir?</label>
+                            <textarea name="Hedef" required placeholder="Hedefinizi detaylıca yazınız..." rows="2"></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label>Beklentiniz nedir?</label>
+                            <textarea name="Beklenti" required placeholder="Eğitim, gelir beklentisi, izleyici vb." rows="2"></textarea>
+                        </div>
+                    </div>
+                    <div class="btn-group split">
+                        <button type="button" class="btn-dark" onclick="prevStep(3)">Geri</button>
+                        <button type="submit" class="btn-pink-full">BAŞVURUYU TAMAMLA</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+        <!-- Footer for Form Page -->
+        <footer class="footer">
+            <div class="footer-logo">Bear <span>Agency</span></div>
+            <div class="footer-links">
+                <a href="#" onclick="showHome()">Ana Sayfa</a>
+                <a href="#" onclick="showForm()">Başvuru Yap</a>
+            </div>
+            <div class="footer-copy">© Tüm Hakları Saklıdır.</div>
+        </footer>
+    </div>
+
+    <!-- Preloader -->
+    <div class="preloader-overlay" id="preloader">
+        <div class="spinner" id="preloaderSpinner"></div>
+        <div class="success-check" id="successCheck">✓</div>
+        <p class="preloader-msg" id="preloaderMsg"></p>
+    </div>
+
+    <script src="script.js?v=4"></script>
+</body>
+</html>

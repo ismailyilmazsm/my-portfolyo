@@ -1,207 +1,91 @@
 <!DOCTYPE html>
-<html lang="tr" class="scroll-smooth">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İsmail Yılmaz | Dijital Marka Mimarı</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        bgDark: '#0f1115', 
-                        textMuted: '#8b92a5',
-                        accentBlue: '#2563eb',
-                        cardBg: '#161920'
-                    },
-                    fontFamily: {
-                        serif: ['"Playfair Display"', 'serif'],
-                        sans: ['"Inter"', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body { background-color: #0f1115; color: #ffffff; }
-        .section-divider { border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .glass-btn {
-            background: rgba(37, 99, 235, 0.15);
-            border: 1px solid rgba(37, 99, 235, 0.3);
-            color: #60a5fa;
-            transition: all 0.3s ease;
-        }
-        .glass-btn:hover {
-            background: rgba(37, 99, 235, 0.3);
-        }
-        .image-container {
-            border: 1px solid rgba(255,255,255,0.05);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            transition: transform 0.5s ease;
-        }
-        .image-container:hover {
-            transform: scale(1.02);
-        }
-    </style>
+    <title>Bear Agency | Hoşgeldiniz</title>
+    <link rel="stylesheet" href="home.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
-<body class="font-sans antialiased selection:bg-accentBlue selection:text-white">
+<body class="loading">
 
-    <!-- Navbar -->
-    <nav class="w-full py-6 px-6 lg:px-12 flex justify-between items-center section-divider fixed top-0 bg-[#0f1115]/90 backdrop-blur-md z-50">
-        <div class="flex items-center gap-2">
-            <span class="text-xl font-bold font-serif tracking-wide">İSMAİL YILMAZ</span>
-            <span class="text-textMuted text-sm hidden sm:inline">| Dijital Marka Mimarı</span>
+    <!-- PRELOADER -->
+    <div id="intro-loader">
+        <div class="intro-content">
+            <div class="intro-spinner"></div>
+            <h2 class="intro-line line1">Merhaba,</h2>
+            <h1 class="intro-line line2">Bear <span>Agency</span>'e Hoşgeldiniz</h1>
+            <p class="intro-line line3">Hemen Tanışalım!</p>
+            <div class="intro-bar"><div class="intro-bar-fill"></div></div>
         </div>
-        
-        <a href="#iletisim" class="glass-btn px-5 py-2 rounded-md font-medium text-sm hidden sm:block">
-            İletişim
-        </a>
+    </div>
+
+    <!-- ARKA PLAN EFEKTLERİ -->
+    <div class="bg-glow glow-blue"></div>
+    <div class="bg-glow glow-pink"></div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">Bear <span>Agency</span></div>
+        <a href="form.html" class="nav-btn">Başvuru Yap</a>
     </nav>
 
-    <main class="max-w-[1400px] mx-auto px-6 lg:px-12 pt-32">
+    <!-- ANA İÇERİK -->
+    <main class="main">
 
-        <!-- BÖLÜM 1: Sosyal Medya -->
-        <section id="sosyal" class="py-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center section-divider">
-            <div class="space-y-6 order-2 lg:order-1">
-                <div class="text-textMuted text-sm tracking-wide">
-                    <span class="text-accentBlue font-medium">Sosyal Medya Büyümesi</span> | Yakala.
-                </div>
-                <h1 class="text-5xl lg:text-6xl font-serif font-semibold leading-tight">
-                    Zirveye Taşıyan: <br>
-                    Stratejik Sosyal <br>
-                    Medya Büyümesi
-                </h1>
-                <p class="text-textMuted text-lg leading-relaxed max-w-md">
-                    Erişimi güçlendirir, organik etkileşimi tetikler ve birbirinden farklı konseptlerde (Oyun, Film, Motor, Motivasyon) devasa topluluklar inşa ederiz.
-                </p>
-                <div class="pt-4">
-                    <button class="glass-btn px-6 py-2.5 rounded-md font-medium text-sm">
-                        Sosyal Etkiyi Keşfet
-                    </button>
-                </div>
+        <!-- HERO -->
+        <section class="hero">
+            <p class="hero-subtitle">TIKTOK YAYINCI AJANSI</p>
+            <h1 class="hero-title">BEAR<br><span>AGENCY</span></h1>
+            <p class="hero-desc">
+                Bear Agency, TikTok'ta yayıncılık yapmak isteyen herkese profesyonel eğitim, 
+                birebir destek ve büyüme stratejileri sunan yeni nesil bir yayıncı ajansıdır. 
+                İster yeni başlıyor ol, ister deneyimli bir içerik üreticisi; seni tanıyor, 
+                potansiyelini keşfediyor ve hedeflerine ulaşman için yanında oluyoruz.
+            </p>
+        </section>
+
+        <!-- ÖZELLİKLER -->
+        <section class="features">
+            <div class="feature-card">
+                <span class="icon">🎓</span>
+                <h3>Profesyonel Eğitim</h3>
+                <p>Deneyimli eğitmenimizle sıfırdan yayıncılığın tüm inceliklerini öğren.</p>
             </div>
-            
-            <div class="order-1 lg:order-2">
-                <div class="h-[300px] sm:h-[400px] lg:h-[500px] w-full image-container rounded-2xl overflow-hidden relative group">
-                    <img src="img_social.jpg" alt="Sosyal Medya Büyümesi" class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#0f1115] via-transparent to-transparent opacity-80"></div>
-                </div>
+            <div class="feature-card">
+                <span class="icon">📈</span>
+                <h3>Büyüme Stratejisi</h3>
+                <p>Sana özel planlarla kitleni organik şekilde büyüt.</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">💸</span>
+                <h3>Kazanç Fırsatı</h3>
+                <p>Yayınlarını gelire dönüştürmenin yollarını birlikte keşfedelim.</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">🎧</span>
+                <h3>7/24 Destek</h3>
+                <p>Takıldığın her noktada samimi ve hızlı destek her zaman yanında.</p>
             </div>
         </section>
 
-        <!-- BÖLÜM 2: Web Altyapı -->
-        <section id="web" class="py-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center section-divider">
-            <div class="order-1">
-                <div class="h-[300px] sm:h-[400px] lg:h-[500px] w-full image-container rounded-2xl overflow-hidden relative group">
-                    <img src="img_web.jpg" alt="Web Geliştirme ve Altyapı" class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#0f1115] via-transparent to-transparent opacity-80"></div>
-                </div>
-            </div>
-            
-            <div class="space-y-6 lg:pl-12 order-2">
-                <div class="text-textMuted text-sm tracking-wide">
-                    <span class="text-accentBlue font-medium">Web Altyapısı</span> | Dönüştür.
-                </div>
-                <h2 class="text-5xl lg:text-6xl font-serif font-semibold leading-tight">
-                    Dijital Temeller: <br>
-                    Yüksek Performanslı <br>
-                    Web Mimarisi
-                </h2>
-                <p class="text-textMuted text-lg leading-relaxed max-w-md">
-                    Ziyaretçileri sadık kitlelere dönüştüren, kriz anında kurtarılan ve markanıza özel inşa edilen kesintisiz, hızlı dijital platformlar.
-                </p>
-                <div class="pt-4">
-                    <button class="glass-btn px-6 py-2.5 rounded-md font-medium text-sm">
-                        Web Projelerini İncele
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- BÖLÜM 3: Kıyafet / Markalaşma -->
-        <section id="merch" class="py-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center section-divider">
-            <div class="space-y-6 order-2 lg:order-1">
-                <div class="text-textMuted text-sm tracking-wide">
-                    <span class="text-accentBlue font-medium">Ürün & Markalaşma</span> | Fiziksel Güç.
-                </div>
-                <h2 class="text-5xl lg:text-6xl font-serif font-semibold leading-tight">
-                    Marka Somutluğu: <br>
-                    Premium Sokak Giyimi <br>
-                    & Yaşam Tarzı
-                </h2>
-                <p class="text-textMuted text-lg leading-relaxed max-w-md">
-                    Marka bağını güçlendiren ve dijital dünyadaki devasa etkiyi fiziksel yaşam tarzına dönüştüren, özel tasarım premium kıyafet (merch) konseptleri.
-                </p>
-                <div class="pt-4">
-                    <button class="glass-btn px-6 py-2.5 rounded-md font-medium text-sm">
-                        Koleksiyonu Gör
-                    </button>
-                </div>
-            </div>
-            
-            <div class="order-1 lg:order-2">
-                <div class="h-[300px] sm:h-[400px] lg:h-[500px] w-full image-container rounded-2xl overflow-hidden relative group">
-                    <img src="img_merch.jpg" alt="Premium Kıyafet Tasarımı" class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#0f1115] via-transparent to-transparent opacity-80"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- BÖLÜM 4: İletişim -->
-        <section id="iletisim" class="py-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div class="space-y-6">
-                <div class="text-textMuted text-sm tracking-wide">
-                    <span class="text-accentBlue font-medium">İletişim</span> | Ortaklık Kur.
-                </div>
-                <h2 class="text-5xl lg:text-6xl font-serif font-semibold leading-tight">
-                    Fikrini Dev Bir <br>
-                    Markaya Dönüştür
-                </h2>
-                <p class="text-textMuted text-lg leading-relaxed max-w-md">
-                    Projeni büyütmek, sistemini kurmak veya sadece vizyonunu paylaşmak için bana ulaş. Dünyanın her yerindeki projelere açığım.
-                </p>
-                <div class="pt-6">
-                    <a href="mailto:iletisim@ismailyilmaz.com" class="text-xl text-white hover:text-accentBlue transition duration-300">
-                        <i class="fa-regular fa-envelope mr-3 text-accentBlue"></i> iletisim@ismailyilmaz.com
-                    </a>
-                </div>
-            </div>
-            
-            <!-- İletişim Formu Tasarımı -->
-            <div class="p-8 border border-gray-800 rounded-2xl bg-cardBg/30 backdrop-blur-md">
-                <form class="space-y-6">
-                    <div>
-                        <label class="block text-sm text-textMuted mb-2">Adınız Soyadınız</label>
-                        <input type="text" class="w-full bg-[#0f1115] border border-gray-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accentBlue transition" placeholder="Ad Soyad">
-                    </div>
-                    <div>
-                        <label class="block text-sm text-textMuted mb-2">E-Posta Adresiniz</label>
-                        <input type="email" class="w-full bg-[#0f1115] border border-gray-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accentBlue transition" placeholder="E-Posta">
-                    </div>
-                    <div>
-                        <label class="block text-sm text-textMuted mb-2">Mesajınız</label>
-                        <textarea rows="4" class="w-full bg-[#0f1115] border border-gray-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accentBlue transition" placeholder="Almak istediğiniz hizmeti yazın..."></textarea>
-                    </div>
-                    <button type="button" class="w-full bg-accentBlue hover:bg-blue-600 text-white font-medium py-3 rounded-lg transition shadow-lg shadow-blue-500/25">
-                        Mesajı Gönder
-                    </button>
-                </form>
+        <!-- CTA (FORM YÖNLENDİRME) -->
+        <section class="cta">
+            <div class="cta-box">
+                <h2>Aramıza Katılmaya Hazır mısın?</h2>
+                <p>Birkaç dakikanı ayır, formu doldur; ekibimiz en kısa sürede seninle iletişime geçsin.</p>
+                <a href="form.html" class="cta-btn">KATILMAK İÇİN FORMU DOLDURUN →</a>
             </div>
         </section>
 
     </main>
 
-    <!-- Footer -->
-    <footer class="w-full py-10 mt-6 border-t border-gray-800/50 text-center text-textMuted text-sm">
-        <div class="flex justify-center gap-6 mb-6">
-            <a href="#" class="hover:text-white transition"><i class="fa-brands fa-instagram text-xl"></i></a>
-            <a href="#" class="hover:text-white transition"><i class="fa-brands fa-twitter text-xl"></i></a>
-            <a href="#" class="hover:text-white transition"><i class="fa-brands fa-linkedin text-xl"></i></a>
-        </div>
-        © 2026 İsmail Yılmaz. Tüm Hakları Saklıdır.
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="logo">Bear <span>Agency</span></div>
+        <p>© Tüm Hakları Saklıdır.</p>
     </footer>
 
+    <script src="home.js"></script>
 </body>
 </html>

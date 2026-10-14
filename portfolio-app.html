@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Sosyal Medya Uzmanı</title>
+<style>
+/* ── RESET ── */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:#060609;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,sans-serif;color:#fff;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:#060609}::-webkit-scrollbar-thumb{background:#7c3aed;border-radius:3px}
+img{display:block;max-width:100%}
+button{font-family:inherit;cursor:pointer}
+
+/* ── LAYOUT ── */
+.w{max-width:1180px;margin:0 auto;padding:0 24px}
+
+/* ── GRADIENT TEXT ── */
+.gp{background:linear-gradient(135deg,#a855f7,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* ── BADGE PILL ── */
+.pill{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:100px;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.25);font-size:11.5px;font-weight:500;color:#c084fc;letter-spacing:.2px}
+.pill .d{width:5px;height:5px;border-radius:50%;background:#a855f7;box-shadow:0 0 5px #a855f7;flex-shrink:0}
+
+/* ── APPLE SQUIRCLE ICON ── */
+.sq{width:48px;height:48px;border-radius:14px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,rgba(255,255,255,.1),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);box-shadow:inset 0 1px 1px rgba(255,255,255,.2),0 6px 18px rgba(139,92,246,.15);backdrop-filter:blur(20px)}
+.sq svg{width:22px;height:22px;fill:none;stroke:#a855f7;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.sq-sm{width:40px;height:40px;border-radius:12px}
+.sq-sm svg{width:18px;height:18px}
+
+/* ── NAVBAR ── */
+#nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(6,6,9,.88);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav-i{display:flex;align-items:center;justify-content:space-between;height:62px}
+.logo{width:40px;height:40px;border-radius:12px;background:linear-gradient(145deg,rgba(124,58,237,.65),rgba(79,70,229,.45));border:1px solid rgba(139,92,246,.4);box-shadow:0 0 18px rgba(124,58,237,.4),inset 0 1px 1px rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:900;color:#fff;cursor:pointer}
+.nav-links{display:flex;gap:26px}
+.nl{background:none;border:none;color:rgba(255,255,255,.5);font-size:13px;font-weight:500;padding-bottom:2px;position:relative;transition:color .25s}
+.nl::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1.5px;background:linear-gradient(90deg,#7c3aed,#6366f1);transition:width .25s}
+.nl:hover,.nl.on{color:#fff}.nl.on{color:#c084fc}
+.nl:hover::after,.nl.on::after{width:100%}
+.teklif{padding:7px 18px;border-radius:100px;border:1px solid rgba(139,92,246,.4);background:rgba(139,92,246,.12);color:#fff;font-size:13px;font-weight:500;transition:all .25s}
+.teklif:hover{background:rgba(139,92,246,.22);border-color:rgba(139,92,246,.6)}
+#hbg{display:none;background:none;border:1px solid rgba(255,255,255,.1);border-radius:9px;padding:7px 9px}
+#hbg svg{stroke:#fff;fill:none;stroke-width:1.8;width:20px;height:20px;display:block}
+#mob{display:none;position:absolute;top:62px;left:0;right:0;background:rgba(6,6,9,.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07);padding:8px 16px 14px;flex-direction:column;gap:2px}
+#mob.on{display:flex}
+.ml{background:none;border:none;color:rgba(255,255,255,.6);font-size:14px;padding:10px 12px;border-radius:9px;text-align:left;transition:all .25s}
+.ml:hover{color:#fff;background:rgba(124,58,237,.1)}
+
+/* ── HERO ── */
+#hero{min-height:100vh;padding:62px 0 0;display:flex;align-items:stretch;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1fr 1.15fr;min-height:calc(100vh - 62px);width:100%;max-width:1180px;margin:0 auto;padding-left:24px}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:48px 48px 48px 0;gap:0}
+.hero-badge{margin-bottom:20px}
+.hero-h{font-size:clamp(2.4rem,4.8vw,3.8rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;margin-bottom:18px}
+.hero-h span{display:block}
+.hero-desc{font-size:14.5px;color:rgba(255,255,255,.48);line-height:1.75;max-width:420px;margin-bottom:26px}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+.btn-p{display:inline-flex;align-items:center;gap:7px;padding:12px 22px;border-radius:100px;border:none;background:linear-gradient(135deg,#7c3aed,#6366f1);color:#fff;font-size:13.5px;font-weight:600;box-shadow:0 0 24px rgba(124,58,237,.35);transition:all .25s}
+.btn-p:hover{box-shadow:0 0 36px rgba(124,58,237,.55);transform:translateY(-1px)}
+.btn-p svg{width:14px;height:14px;fill:none;stroke:#fff;stroke-width:2.2}
+.btn-g{display:inline-flex;align-items:center;gap:7px;padding:11px 22px;border-radius:100px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.85);font-size:13.5px;font-weight:500;transition:all .25s}
+.btn-g:hover{background:rgba(255,255,255,.09);border-color:rgba(139,92,246,.4)}
+.hero-soc{display:flex;gap:9px}
+.sc{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;transition:all .25s}
+.sc:hover{background:rgba(124,58,237,.2);border-color:rgba(124,58,237,.45)}
+.sc svg{width:15px;height:15px;fill:none;stroke-width:1.7}
+
+/* ── HERO RIGHT (Woman photo + widgets) ── */
+.hero-right{position:relative;overflow:hidden}
+.hero-img{width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(.65) saturate(1.15)}
+/* purple atmosphere over photo */
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,#060609 0%,rgba(6,6,9,.15) 30%,transparent 60%),linear-gradient(to top,#060609 0%,transparent 40%),radial-gradient(ellipse at 55% 40%,rgba(124,58,237,.3) 0%,transparent 65%);pointer-events:none}
+
+/* Widgets */
+.w-ig{position:absolute;top:52px;left:52px;width:64px;height:64px;border-radius:18px;background:linear-gradient(145deg,#f09433,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888);box-shadow:0 10px 32px rgba(220,39,67,.45),0 0 0 1.5px rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;animation:fw 6s ease-in-out infinite}
+.w-ig svg{width:32px;height:32px;fill:none;stroke:#fff;stroke-width:1.6}
+.w-tk{position:absolute;top:140px;left:40px;width:50px;height:50px;border-radius:15px;background:rgba(12,10,28,.92);border:1px solid rgba(255,255,255,.12);box-shadow:0 8px 24px rgba(0,0,0,.5),0 0 18px rgba(105,232,212,.12);display:flex;align-items:center;justify-content:center;animation:fw 8s ease-in-out 1.2s infinite}
+.w-tk svg{width:24px;height:24px}
+.w-anal{position:absolute;top:36px;right:28px;background:rgba(10,8,24,.85);border:1px solid rgba(139,92,246,.22);border-radius:18px;padding:14px 18px;min-width:155px;backdrop-filter:blur(18px);box-shadow:0 10px 34px rgba(0,0,0,.45),0 0 28px rgba(124,58,237,.1);animation:fw 7s ease-in-out .5s infinite}
+.w-anal-lbl{font-size:10px;color:rgba(255,255,255,.38);font-weight:500;margin-bottom:3px}
+.w-anal-val{font-size:26px;font-weight:800;color:#a855f7;line-height:1;margin-bottom:8px}
+.w-anal svg.ch{width:100%;height:38px}
+.w-reels{position:absolute;bottom:54px;left:28px;background:rgba(10,8,24,.85);border:1px solid rgba(255,255,255,.09);border-radius:18px;overflow:hidden;width:132px;box-shadow:0 10px 34px rgba(0,0,0,.5);backdrop-filter:blur(18px);animation:fw 9s ease-in-out 2.2s infinite}
+.w-reels img{width:100%;height:86px;object-fit:cover}
+.w-reels-b{padding:10px 12px}
+.w-reels-b .rt{display:flex;align-items:center;gap:5px;margin-bottom:6px}
+.w-reels-b .rl{font-size:11.5px;font-weight:700;color:#fff}
+.w-reels-b .ri{display:flex;gap:8px}
+.w-reels-b .ri svg{width:12px;height:12px;fill:none;stroke:rgba(255,255,255,.45);stroke-width:1.8}
+.w-lk{position:absolute;bottom:62px;right:28px;background:rgba(10,8,24,.88);border:1px solid rgba(168,85,247,.28);border-radius:100px;padding:9px 18px;display:flex;align-items:center;gap:8px;backdrop-filter:blur(18px);box-shadow:0 8px 24px rgba(0,0,0,.4),0 0 18px rgba(168,85,247,.12);font-size:14.5px;font-weight:700;animation:fw 6.5s ease-in-out 1.6s infinite}
+@keyframes fw{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+
+/* ── STATS STRIP ── */
+#stats{border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07);padding:46px 0}
+.stats-g{display:grid;grid-template-columns:repeat(4,1fr)}
+.st{text-align:center;padding:0 16px;border-right:1px solid rgba(255,255,255,.07)}
+.st:last-child{border-right:none}
+.st-n{font-size:clamp(1.9rem,3vw,2.6rem);font-weight:800;line-height:1;margin-bottom:8px}
+.st-l{font-size:13px;color:rgba(255,255,255,.38);font-weight:400}
+
+/* ── SERVICES ── */
+#hizmetler{padding:84px 0}
+.srv-hd{margin-bottom:46px}
+.sec-h{font-size:clamp(1.65rem,2.8vw,2.2rem);font-weight:800;line-height:1.18;letter-spacing:-.025em;margin-top:14px}
+.sec-sub{font-size:14px;color:rgba(255,255,255,.38);line-height:1.7;max-width:540px;margin-top:10px}
+.srv-g{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.srv-c{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.075);border-radius:18px;padding:26px 22px;display:flex;flex-direction:column;transition:all .3s}
+.srv-c:hover{border-color:rgba(139,92,246,.28);box-shadow:0 0 36px rgba(139,92,246,.07);transform:translateY(-3px)}
+.srv-ic{margin-bottom:18px}
+.srv-t{font-size:15px;font-weight:700;color:#fff;margin-bottom:9px}
+.srv-d{font-size:13px;color:rgba(255,255,255,.38);line-height:1.65;flex:1;margin-bottom:20px}
+.srv-ft{display:flex;justify-content:flex-end}
+.arr{width:32px;height:32px;border-radius:50%;background:rgba(139,92,246,.14);border:1px solid rgba(139,92,246,.28);display:flex;align-items:center;justify-content:center;transition:all .25s}
+.arr:hover{background:rgba(139,92,246,.28)}
+.arr svg{width:13px;height:13px;fill:none;stroke:#a855f7;stroke-width:2.2}
+
+/* ── PROJECTS ── */
+#projeler{padding:84px 0}
+.proj-hd{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:36px;flex-wrap:wrap;gap:12px}
+.proj-g{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.proj-c{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.075);border-radius:20px;overflow:hidden;transition:all .3s}
+.proj-c:hover{border-color:rgba(139,92,246,.28);transform:translateY(-3px);box-shadow:0 18px 50px rgba(0,0,0,.4)}
+.proj-p{position:relative;height:190px;overflow:hidden}
+.proj-p img{width:100%;height:100%;object-fit:cover;filter:brightness(.72) saturate(1.1);transition:transform .5s}
+.proj-c:hover .proj-p img{transform:scale(1.06)}
+.proj-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,9,1) 0%,rgba(6,6,9,.5) 50%,transparent 100%)}
+.proj-tag{position:absolute;top:13px;left:13px;background:rgba(6,6,9,.72);border:1px solid rgba(139,92,246,.28);border-radius:100px;padding:4px 11px;font-size:10.5px;color:#c084fc;font-weight:600;backdrop-filter:blur(10px)}
+.proj-b{padding:18px 20px 20px}
+.proj-n{font-size:15px;font-weight:700;color:#fff;margin-bottom:2px}
+.proj-s{font-size:11.5px;color:rgba(255,255,255,.32);margin-bottom:14px}
+.proj-m{display:flex;gap:18px}
+.proj-mv{font-size:19px;font-weight:800;margin-bottom:2px}
+.proj-ml{font-size:11px;color:rgba(255,255,255,.32)}
+
+/* ── ABOUT ── */
+#hakkimda{padding:84px 0}
+.ab-g{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;margin-bottom:64px}
+.ab-txt{padding-top:4px}
+.ab-h{font-size:clamp(1.65rem,2.8vw,2.2rem);font-weight:800;line-height:1.2;letter-spacing:-.025em;margin-top:14px}
+.ab-p{font-size:14px;color:rgba(255,255,255,.42);line-height:1.78;margin:18px 0 26px}
+.ab-img-wr{position:relative;border-radius:20px;overflow:hidden;height:100%;min-height:320px;border:1px solid rgba(255,255,255,.07)}
+.ab-img{width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(.6) saturate(1.1)}
+.ab-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(79,70,229,.08));mix-blend-mode:screen}
+.ab-wm{position:absolute;bottom:18px;right:16px;font-size:11.5px;font-style:italic;font-weight:600;color:rgba(255,255,255,.45);letter-spacing:.3px;text-shadow:0 0 10px rgba(168,85,247,.5)}
+
+/* ── WHY ME ── */
+.why-g{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.why-i{display:flex;gap:14px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.075);border-radius:16px;padding:20px;transition:all .25s}
+.why-i:hover{border-color:rgba(139,92,246,.25);box-shadow:0 0 28px rgba(139,92,246,.06)}
+.why-t{font-size:14px;font-weight:700;color:#fff;margin-bottom:5px}
+.why-d{font-size:12.5px;color:rgba(255,255,255,.38);line-height:1.6}
+
+/* ── TESTIMONIALS ── */
+#referanslar{padding:84px 0}
+.tst-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:12px}
+.tst-arr{display:flex;gap:8px}
+.ab{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);display:flex;align-items:center;justify-content:center;transition:all .25s}
+.ab:hover{background:rgba(124,58,237,.18);border-color:rgba(124,58,237,.38)}
+.ab svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8}
+.tst-g{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.tst-c{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.075);border-radius:20px;padding:28px 26px;transition:border-color .25s}
+.tst-c:hover{border-color:rgba(139,92,246,.22)}
+.tst-qi{width:42px;height:42px;border-radius:12px;background:rgba(124,58,237,.14);border:1px solid rgba(124,58,237,.22);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.tst-qi svg{width:19px;height:19px;fill:#7c3aed}
+.tst-tx{font-size:13.5px;color:rgba(255,255,255,.5);line-height:1.75;font-style:italic;margin-bottom:20px}
+.tst-au{display:flex;align-items:center;gap:11px}
+.tst-av{width:40px;height:40px;border-radius:50%;overflow:hidden;border:1.5px solid rgba(139,92,246,.28);flex-shrink:0}
+.tst-av img{width:100%;height:100%;object-fit:cover}
+.tst-nm{font-size:13.5px;font-weight:700;color:#fff}
+.tst-rl{font-size:11.5px;color:rgba(255,255,255,.32);margin-top:1px}
+
+/* ── CONTACT ── */
+#iletisim{padding:84px 0}
+.ct-g{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.ct-lp{font-size:14px;color:rgba(255,255,255,.42);line-height:1.75;margin:16px 0 28px;max-width:420px}
+.ct-form{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.075);border-radius:20px;padding:30px 26px}
+.fi{width:100%;padding:12px 15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;color:#fff;font-size:13.5px;font-family:inherit;outline:none;transition:border-color .25s,box-shadow .25s;margin-bottom:13px}
+.fi:focus{border-color:rgba(139,92,246,.48);box-shadow:0 0 18px rgba(139,92,246,.09)}
+.fi::placeholder{color:rgba(255,255,255,.26)}
+.fta{resize:none;height:106px}
+.fsb{width:100%;padding:13px;border-radius:100px;border:none;background:linear-gradient(135deg,#7c3aed,#6366f1);color:#fff;font-size:14px;font-weight:600;font-family:inherit;box-shadow:0 0 26px rgba(124,58,237,.32);transition:all .25s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:4px}
+.fsb:hover{box-shadow:0 0 42px rgba(124,58,237,.52);transform:translateY(-1px)}
+.fsb svg{width:14px;height:14px;fill:none;stroke:#fff;stroke-width:2}
+.fs-ok{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.22);color:#4ade80;padding:11px;border-radius:11px;text-align:center;font-size:13px;font-weight:500;margin-top:10px;animation:fup .3s ease}
+@keyframes fup{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid rgba(255,255,255,.06);padding:52px 0 28px}
+.ft-g{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:44px;margin-bottom:44px}
+.ft-lg{width:42px;height:42px;border-radius:13px;background:linear-gradient(145deg,rgba(124,58,237,.6),rgba(79,70,229,.38));border:1px solid rgba(139,92,246,.36);box-shadow:0 0 18px rgba(124,58,237,.3),inset 0 1px 1px rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:900;cursor:pointer;margin-bottom:14px}
+.ft-tg{font-size:12.5px;color:rgba(255,255,255,.32);line-height:1.65;max-width:230px;margin-bottom:18px}
+.ft-soc{display:flex;gap:7px}
+.ft-soc .sc{width:32px;height:32px}
+.ft-soc .sc svg{width:13px;height:13px}
+.ft-ct{font-size:11px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.8px;margin-bottom:14px}
+.ft-l{display:block;font-size:13px;color:rgba(255,255,255,.32);margin-bottom:9px;background:none;border:none;text-align:left;transition:color .25s;padding:0}
+.ft-l:hover{color:rgba(255,255,255,.75)}
+.ft-bt{border-top:1px solid rgba(255,255,255,.06);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.ft-cp{font-size:12px;color:rgba(255,255,255,.2)}
+.ft-cr{font-size:12px;color:rgba(255,255,255,.2);display:flex;align-items:center;gap:5px}
+.ft-cr svg{width:11px;height:11px;fill:#7c3aed}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){.srv-g{grid-template-columns:1fr 1fr}.proj-g{grid-template-columns:1fr 1fr}.ft-g{grid-template-columns:1fr 1fr;gap:30px}}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;min-height:auto}.hero-right{height:420px}.hero-left{padding:40px 0 32px}.ab-g{grid-template-columns:1fr;gap:30px}.ct-g{grid-template-columns:1fr;gap:30px}.tst-g{grid-template-columns:1fr}.stats-g{grid-template-columns:1fr 1fr;row-gap:28px}.st:nth-child(2){border-right:none}.st:nth-child(n+3){border-top:1px solid rgba(255,255,255,.07);padding-top:28px}}
+@media(max-width:768px){.nav-links,.teklif{display:none}#hbg{display:flex;align-items:center}.srv-g{grid-template-columns:1fr}.proj-g{grid-template-columns:1fr}.why-g{grid-template-columns:1fr}.ft-g{grid-template-columns:1fr;gap:24px}.tst-hd{flex-direction:column;align-items:flex-start}.proj-hd{flex-direction:column;align-items:flex-start}.hero-btns{flex-direction:column}.hero-btns .btn-p,.hero-btns .btn-g{justify-content:center;width:100%}}
+@media(max-width:480px){.stats-g{grid-template-columns:1fr}.st{border-right:none !important;border-bottom:1px solid rgba(255,255,255,.07);padding-bottom:22px;margin-bottom:0}.st:last-child{border-bottom:none;padding-bottom:0}.ft-bt{flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+
+<!-- ══════════ NAVBAR ══════════ -->
+<nav id="nav">
+  <div class="w">
+    <div class="nav-i">
+      <div class="logo" onclick="gs('hero')">S</div>
+      <div class="nav-links">
+        <button class="nl on" onclick="gs('hero')" data-s="hero">Ana Sayfa</button>
+        <button class="nl" onclick="gs('hakkimda')" data-s="hakkimda">Hakkımda</button>
+        <button class="nl" onclick="gs('hizmetler')" data-s="hizmetler">Hizmetler</button>
+        <button class="nl" onclick="gs('projeler')" data-s="projeler">Projeler</button>
+        <button class="nl" onclick="gs('referanslar')" data-s="referanslar">Blog</button>
+        <button class="nl" onclick="gs('iletisim')" data-s="iletisim">İletişim</button>
+      </div>
+      <button class="teklif" onclick="gs('iletisim')">Teklif Al →</button>
+      <button id="hbg" onclick="tm()"><svg id="hic" viewBox="0 0 24 24"><line x1="3" y1="7" x2="21" y2="7" stroke-linecap="round"/><line x1="3" y1="12" x2="21" y2="12" stroke-linecap="round"/><line x1="3" y1="17" x2="21" y2="17" stroke-linecap="round"/></svg></button>
+    </div>
+  </div>
+  <div id="mob">
+    <button class="ml" onclick="gs('hero');cm()">Ana Sayfa</button>
+    <button class="ml" onclick="gs('hakkimda');cm()">Hakkımda</button>
+    <button class="ml" onclick="gs('hizmetler');cm()">Hizmetler</button>
+    <button class="ml" onclick="gs('projeler');cm()">Projeler</button>
+    <button class="ml" onclick="gs('referanslar');cm()">Blog</button>
+    <button class="ml" onclick="gs('iletisim');cm()">İletişim</button>
+    <div style="padding:8px 4px 0"><button class="teklif" style="width:100%" onclick="gs('iletisim');cm()">Teklif Al →</button></div>
+  </div>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section id="hero">
+  <div class="hero-grid">
+    <!-- LEFT: Text -->
+    <div class="hero-left">
+      <div class="hero-badge"><span class="pill"><span class="d"></span>Sosyal Medya Uzmanı</span></div>
+      <h1 class="hero-h">
+        <span>Markanızın</span>
+        <span>Dijitaldeki</span>
+        <span class="gp">En Güçlü Sesi</span>
+      </h1>
+      <p class="hero-desc">Sosyal medya stratejileri, yaratıcı içerikler ve veri odaklı analizlerle markanızın dijitalde doğru hedef kitleye ulaşmasını sağlıyorum. Daha fazla görünürlük, daha güçlü etkileşim, daha fazla dönüşüm.</p>
+      <div class="hero-btns">
+        <button class="btn-p" onclick="gs('hizmetler')">Hizmetlerimi İncele <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        <button class="btn-g" onclick="gs('iletisim')">Benimle İletişime Geç</button>
+      </div>
+      <div class="hero-soc">
+        <div class="sc"><svg viewBox="0 0 24 24" stroke="#E1306C"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+        <div class="sc"><svg viewBox="0 0 24 24" stroke="rgba(255,255,255,.65)" fill="none"><path d="M4 4l16 16M4 20 20 4" stroke-linecap="round"/></svg></div>
+        <div class="sc"><svg viewBox="0 0 24 24" stroke="#0A66C2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+        <div class="sc"><svg viewBox="0 0 24 24" stroke="rgba(255,255,255,.65)" fill="none"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" stroke-linecap="round"/></svg></div>
+        <div class="sc"><svg viewBox="0 0 24 24" stroke="#FF0000" fill="none"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#FF0000" stroke="none"/></svg></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Woman portrait + floating widgets -->
+    <div class="hero-right">
+      <!-- Dark moody woman portrait -->
+      <img class="hero-img"
+        src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=900&q=85"
+        alt="Sosyal Medya Uzmanı"
+        onerror="this.src='https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=85'"
+      />
+      <div class="hero-overlay"></div>
+
+      <!-- Instagram squircle -->
+      <div class="w-ig">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="rgba(255,255,255,.9)" stroke="none"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="#C13584" fill="none" stroke-width="1.5"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="#C13584" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+
+      <!-- TikTok squircle -->
+      <div class="w-tk">
+        <svg viewBox="0 0 24 24" width="27" height="27" fill="none">
+          <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" stroke="#69C9D0" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" stroke="#EE1D52" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="2 6" stroke-dashoffset="2"/>
+        </svg>
+      </div>
+
+      <!-- Analytics card -->
+      <div class="w-anal">
+        <div class="w-anal-lbl">Erişim Artışı</div>
+        <div class="w-anal-val">+248%</div>
+        <svg class="ch" viewBox="0 0 150 38" fill="none">
+          <defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#a855f7" stop-opacity=".35"/><stop offset="100%" stop-color="#a855f7" stop-opacity="0"/></linearGradient></defs>
+          <path d="M0 34 L20 28 L40 30 L60 20 L80 22 L100 11 L120 7 L140 3 L150 1" stroke="#a855f7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M0 34 L20 28 L40 30 L60 20 L80 22 L100 11 L120 7 L140 3 L150 1 L150 38 L0 38Z" fill="url(#cg)"/>
+          <circle cx="150" cy="1" r="3.5" fill="#a855f7"/>
+        </svg>
+      </div>
+
+      <!-- Reels card -->
+      <div class="w-reels">
+        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=400&q=80" alt="Reels"/>
+        <div class="w-reels-b">
+          <div class="rt"><span style="font-size:13px">🎬</span><span class="rl">Reels</span></div>
+          <div class="ri">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Likes pill -->
+      <div class="w-lk"><span>💜</span><span>12.4K</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ STATS ══════════ -->
+<div id="stats">
+  <div class="w">
+    <div class="stats-g">
+      <div class="st"><div class="st-n gp">50+</div><div class="st-l">Tamamlanan Proje</div></div>
+      <div class="st"><div class="st-n gp">30+</div><div class="st-l">Mutlu Müşteri</div></div>
+      <div class="st"><div class="st-n gp">5+</div><div class="st-l">Yıllık Deneyim</div></div>
+      <div class="st"><div class="st-n gp">+2.5M</div><div class="st-l">Toplam Erişim</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ HİZMETLER ══════════ -->
+<section id="hizmetler">
+  <div class="w">
+    <div class="srv-hd">
+      <span class="pill"><span class="d"></span>Hizmetlerim</span>
+      <h2 class="sec-h">Sosyal Medyada Başarı İçin<br>İhtiyacınız Olan Her Şey</h2>
+      <p class="sec-sub">Her markanın hikayesi farklıdır. Ben, markanızın hikayesini en iyi şekilde anlatmak için size özel stratejiler geliştiriyorum.</p>
+    </div>
+    <div class="srv-g">
+
+      <div class="srv-c">
+        <div class="srv-ic sq"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="#a855f7" stroke="none"/></svg></div>
+        <div class="srv-t">Strateji Geliştirme</div>
+        <div class="srv-d">Hedef kitlenize uygun, ölçülebilir ve sürdürülebilir sosyal medya stratejileri oluşturuyorum.</div>
+        <div class="srv-ft"><div class="arr"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div>
+      </div>
+
+      <div class="srv-c">
+        <div class="srv-ic sq"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+        <div class="srv-t">İçerik Üretimi</div>
+        <div class="srv-d">Markanızın ruhunu yansıtan yaratıcı ve özgün içerikler üretiyorum.</div>
+        <div class="srv-ft"><div class="arr"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div>
+      </div>
+
+      <div class="srv-c">
+        <div class="srv-ic sq"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <div class="srv-t">Reklam Yönetimi</div>
+        <div class="srv-d">Hedef odaklı reklam kampanyaları ile doğru kişilere, doğru mesajı ulaştırıyorum.</div>
+        <div class="srv-ft"><div class="arr"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div>
+      </div>
+
+      <div class="srv-c">
+        <div class="srv-ic sq"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <div class="srv-t">Hesap Yönetimi</div>
+        <div class="srv-d">Sosyal medya hesaplarınızı düzenli ve profesyonel şekilde yönetiyorum.</div>
+        <div class="srv-ft"><div class="arr"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div>
+      </div>
+
+      <div class="srv-c">
+        <div class="srv-ic sq"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+        <div class="srv-t">Analiz & Raporlama</div>
+        <div class="srv-d">Verileri analiz ederek stratejilerinizi sürekli geliştiriyor, size detaylı raporlar sunuyorum.</div>
+        <div class="srv-ft"><div class="arr"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div>
+      </div>
+
+      <div class="srv-c">
+        <div class="srv-ic sq"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div class="srv-t">Danışmanlık</div>
+        <div class="srv-d">Markanıza özel çözümler için birebir danışmanlık hizmeti veriyorum.</div>
+        <div class="srv-ft"><div class="arr"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PROJELER ══════════ -->
+<section id="projeler">
+  <div class="w">
+    <div class="proj-hd">
+      <div>
+        <span class="pill"><span class="d"></span>Öne Çıkan Projeler</span>
+        <h2 class="sec-h" style="margin-top:12px">Gerçek Sonuçlar, Doğru Strateji</h2>
+        <p class="sec-sub" style="margin-top:8px">Farklı sektörlerden markalarla çalışarak sosyal medyada somut başarılar elde ettik.</p>
+      </div>
+      <button class="btn-g" style="white-space:nowrap">Tüm Projeler →</button>
+    </div>
+    <div class="proj-g">
+
+      <div class="proj-c">
+        <div class="proj-p">
+          <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80" alt="Teknoloji"/>
+          <div class="proj-ov"></div>
+          <div class="proj-tag">Instagram & TikTok Stratejisi</div>
+        </div>
+        <div class="proj-b">
+          <div class="proj-n">Teknoloji Markası</div>
+          <div class="proj-s">Instagram & TikTok Stratejisi</div>
+          <div class="proj-m">
+            <div><div class="proj-mv gp">+320%</div><div class="proj-ml">Erişim Artışı</div></div>
+            <div><div class="proj-mv gp">+180%</div><div class="proj-ml">Etkileşim Artışı</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-c">
+        <div class="proj-p">
+          <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80" alt="Kahve"/>
+          <div class="proj-ov"></div>
+          <div class="proj-tag">Sosyal Medya Yönetimi</div>
+        </div>
+        <div class="proj-b">
+          <div class="proj-n">Kahve Zinciri</div>
+          <div class="proj-s">Yiyecek & İçecek · TikTok</div>
+          <div class="proj-m">
+            <div><div class="proj-mv gp">+210%</div><div class="proj-ml">Takipçi Artışı</div></div>
+            <div><div class="proj-mv gp">+145%</div><div class="proj-ml">Etkileşim Artışı</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-c">
+        <div class="proj-p">
+          <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80" alt="Moda"/>
+          <div class="proj-ov"></div>
+          <div class="proj-tag">Reels İçerik Stratejisi</div>
+        </div>
+        <div class="proj-b">
+          <div class="proj-n">Moda Markası</div>
+          <div class="proj-s">Moda · Instagram</div>
+          <div class="proj-m">
+            <div><div class="proj-mv gp">+430%</div><div class="proj-ml">Erişim Artışı</div></div>
+            <div><div class="proj-mv gp">+220%</div><div class="proj-ml">Satış Artışı</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ HAKKIMDA + NEDEN BEN ══════════ -->
+<section id="hakkimda">
+  <div class="w">
+
+    <!-- About split -->
+    <div class="ab-g">
+      <div class="ab-txt">
+        <span class="pill"><span class="d"></span>Hakkımda</span>
+        <h2 class="ab-h">Dijital Dünyayı Seven Bir<br>Sosyal Medya Uzmanı</h2>
+        <p class="ab-p">Sosyal medya, benim için sadece bir iş değil, aynı zamanda bir tutku. Markaların dijitalde güçlü bir kimlik oluşturmasına yardımcı olmak için strateji, yaratıcılık ve analitiği bir araya getiriyorum. Her projede, markanın hikayesini en doğru şekilde anlatmayı hedefliyorum.</p>
+        <button class="btn-p">Daha Fazla →</button>
+      </div>
+      <!-- Woman portrait on right of About -->
+      <div class="ab-img-wr">
+        <img class="ab-img"
+          src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=85"
+          alt="Hakkımda"
+          onerror="this.src='https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=800&q=85'"
+        />
+        <div class="ab-ov"></div>
+        <div class="ab-wm">Dijitalde Daha Fazlası</div>
+      </div>
+    </div>
+
+    <!-- Why Me -->
+    <div style="margin-bottom:16px">
+      <span class="pill"><span class="d"></span>Neden Ben?</span>
+      <h2 class="sec-h" style="margin-top:14px">Sadece İçerik Değil,<br>Strateji Sunuyorum</h2>
+    </div>
+    <div class="why-g">
+      <div class="why-i">
+        <div class="sq sq-sm" style="flex-shrink:0"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+        <div><div class="why-t">Veri Odaklı Yaklaşım</div><div class="why-d">Kararları sezgilerle değil, verilerle alıyorum.</div></div>
+      </div>
+      <div class="why-i">
+        <div class="sq sq-sm" style="flex-shrink:0"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <div><div class="why-t">Yaratıcı Fikirler</div><div class="why-d">Markanıza özel, özgün ve dikkat çekici içerikler üretiyorum.</div></div>
+      </div>
+      <div class="why-i">
+        <div class="sq sq-sm" style="flex-shrink:0"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <div><div class="why-t">Güncel Trendleri Takip</div><div class="why-d">Sürekli değişen sosyal medya dünyasında her zaman bir adım öndeyim.</div></div>
+      </div>
+      <div class="why-i">
+        <div class="sq sq-sm" style="flex-shrink:0"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div><div class="why-t">Sonuç Odaklı Çalışma</div><div class="why-d">Hedeflerinize ulaşmak için stratejileri sürekli optimize ediyorum.</div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ TESTİMONİALS ══════════ -->
+<section id="referanslar">
+  <div class="w">
+    <div class="tst-hd">
+      <div>
+        <span class="pill"><span class="d"></span>Müşteri Yorumları</span>
+        <h2 class="sec-h" style="margin-top:12px">Müşterilerim Ne Diyor?</h2>
+      </div>
+      <div class="tst-arr">
+        <button class="ab"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
+        <button class="ab"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+      </div>
+    </div>
+    <div class="tst-g">
+      <div class="tst-c">
+        <div class="tst-qi"><svg viewBox="0 0 24 24"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg></div>
+        <p class="tst-tx">"Sosyal medya hesaplarımızın yönetimini kendisine teslim ettikten sonra markamızın bilinirliği ciddi anlamda arttı. Hem yaratıcı fikirleri hem de profesyonel yaklaşımıyla gerçekten fark yaratıyor."</p>
+        <div class="tst-au">
+          <div class="tst-av"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=100&q=80" alt="Elif Demir"/></div>
+          <div><div class="tst-nm">Elif Demir</div><div class="tst-rl">Marka Yöneticisi</div></div>
+        </div>
+      </div>
+      <div class="tst-c">
+        <div class="tst-qi"><svg viewBox="0 0 24 24"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg></div>
+        <p class="tst-tx">"Sadece içerik üretmiyor, gerçekten düşünüyor. Hedef kitlemizi, trendleri ve sektörü çok iyi analiz ediyor. Sosyal medyada fark yaratmak isteyen her markanın mutlaka çalışması gereken bir uzman."</p>
+        <div class="tst-au">
+          <div class="tst-av"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=100&q=80" alt="Kerem Yılmaz"/></div>
+          <div><div class="tst-nm">Kerem Yılmaz</div><div class="tst-rl">Girişimci</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ İLETİŞİM ══════════ -->
+<section id="iletisim">
+  <div class="w">
+    <div class="ct-g">
+      <div>
+        <span class="pill"><span class="d"></span>İletişim</span>
+        <h2 class="sec-h" style="margin-top:14px">Markanız İçin<br>Birlikte Çalışalım</h2>
+        <p class="ct-lp">Sosyal medya hedeflerinizi konuşalım, size özel bir strateji oluşturmak veya aklınızdaki soruları sormak için benimle iletişime geçebilirsiniz.</p>
+        <button class="btn-p" onclick="gs('iletisim')">İletişime Geç →</button>
+      </div>
+      <div class="ct-form">
+        <input class="fi" type="text" placeholder="Ad Soyad"/>
+        <input class="fi" type="email" placeholder="E-posta Adresi"/>
+        <textarea class="fi fta" placeholder="Mesajınız..."></textarea>
+        <div id="fs"></div>
+        <button class="fsb" onclick="hf()">Gönder <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="w">
+    <div class="ft-g">
+      <div>
+        <div class="ft-lg">S</div>
+        <p class="ft-tg">Dijitalde güçlü markalar, doğru stratejilerle büyür.</p>
+        <div class="ft-soc">
+          <div class="sc"><svg viewBox="0 0 24 24" stroke="#E1306C" stroke-width="1.7" fill="none"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+          <div class="sc"><svg viewBox="0 0 24 24" stroke="rgba(255,255,255,.6)" stroke-width="1.7" fill="none"><path d="M4 4l16 16M4 20 20 4" stroke-linecap="round"/></svg></div>
+          <div class="sc"><svg viewBox="0 0 24 24" stroke="rgba(255,255,255,.6)" stroke-width="1.7" fill="none"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" stroke-linecap="round"/></svg></div>
+          <div class="sc"><svg viewBox="0 0 24 24" stroke="#FF0000" stroke-width="1.7" fill="none"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/></svg></div>
+          <div class="sc"><svg viewBox="0 0 24 24" stroke="#0A66C2" stroke-width="1.7" fill="none"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+        </div>
+      </div>
+      <div>
+        <div class="ft-ct">Hizmetler</div>
+        <button class="ft-l" onclick="gs('hizmetler')">Strateji Geliştirme</button>
+        <button class="ft-l" onclick="gs('hizmetler')">İçerik Üretimi</button>
+        <button class="ft-l" onclick="gs('hizmetler')">Reklam Yönetimi</button>
+        <button class="ft-l" onclick="gs('hizmetler')">Hesap Yönetimi</button>
+        <button class="ft-l" onclick="gs('hizmetler')">Danışmanlık</button>
+      </div>
+      <div>
+        <div class="ft-ct">Projeler</div>
+        <button class="ft-l">Teknoloji Markası</button>
+        <button class="ft-l">Kahve Zinciri</button>
+        <button class="ft-l">Moda Markası</button>
+        <button class="ft-l">Tüm Projeler</button>
+      </div>
+      <div>
+        <div class="ft-ct">Blog</div>
+        <button class="ft-l" onclick="gs('hero')">Ana Sayfa</button>
+        <button class="ft-l" onclick="gs('hakkimda')">Hakkımda</button>
+        <button class="ft-l" onclick="gs('hizmetler')">Hizmetler</button>
+        <button class="ft-l" onclick="gs('iletisim')">İletişim</button>
+      </div>
+    </div>
+    <div class="ft-bt">
+      <span class="ft-cp">© 2025. Tüm hakları saklıdır.</span>
+      <span class="ft-cr">Sosyal Medya Uzmanı <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* scroll to section */
+function gs(id){
+  const el=document.getElementById(id);if(!el)return;
+  const top=el.getBoundingClientRect().top+window.pageYOffset-66;
+  window.scrollTo({top,behavior:'smooth'});
+}
+
+/* mobile menu */
+let mo=false;
+function tm(){
+  mo=!mo;
+  document.getElementById('mob').classList.toggle('on',mo);
+  document.getElementById('hic').innerHTML=mo
+    ?'<line x1="18" y1="6" x2="6" y2="18" stroke-linecap="round"/><line x1="6" y1="6" x2="18" y2="18" stroke-linecap="round"/>'
+    :'<line x1="3" y1="7" x2="21" y2="7" stroke-linecap="round"/><line x1="3" y1="12" x2="21" y2="12" stroke-linecap="round"/><line x1="3" y1="17" x2="21" y2="17" stroke-linecap="round"/>';
+}
+function cm(){mo=false;document.getElementById('mob').classList.remove('on');document.getElementById('hic').innerHTML='<line x1="3" y1="7" x2="21" y2="7" stroke-linecap="round"/><line x1="3" y1="12" x2="21" y2="12" stroke-linecap="round"/><line x1="3" y1="17" x2="21" y2="17" stroke-linecap="round"/>';}
+
+/* active nav */
+const sids=['hero','hizmetler','projeler','hakkimda','referanslar','iletisim'];
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)document.querySelectorAll('.nl').forEach(l=>l.classList.toggle('on',l.dataset.s===e.target.id));});},{threshold:.25,rootMargin:'-66px 0px -30% 0px'});
+sids.forEach(id=>{const el=document.getElementById(id);if(el)io.observe(el);});
+
+/* contact form */
+function hf(){
+  const b=document.getElementById('fs');
+  b.innerHTML='<div class="fs-ok">✅ Mesajınız gönderildi! En kısa sürede dönüş yapacağım.</div>';
+  setTimeout(()=>b.innerHTML='',4000);
+}
+
+/* scroll-in fade */
+const fe=document.querySelectorAll('.srv-c,.proj-c,.tst-c,.why-i,.st');
+const fo=new IntersectionObserver(es=>{
+  es.forEach((e,i)=>{
+    if(e.isIntersecting){
+      const el=e.target;
+      el.style.opacity='0';el.style.transform='translateY(22px)';
+      el.style.transition=`opacity .5s ease ${i*.06}s,transform .5s ease ${i*.06}s`;
+      requestAnimationFrame(()=>{el.style.opacity='1';el.style.transform='translateY(0)';});
+      fo.unobserve(el);
+    }
+  });
+},{threshold:.08});
+fe.forEach(el=>{el.style.opacity='0';fo.observe(el);});
+</script>
+</body>
+</html>
